@@ -1,0 +1,260 @@
+<! doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="../css/css6.css"/>
+	<style type="text/css">
+	</style>
+</head>
+	
+	<script type="text/javascript" src="../jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../js/cookietools.js"></script>
+	<script type="text/javascript">
+$(function(){
+		$(".location").hover(function(){
+				$(".location ul").toggle();
+			});
+	})
+ $(function(){
+	$(".header-21").hover(function(){
+		$(".header-22").toggle();
+		}
+		);
+	$(".header-23").hover(function(){
+		$(".header-24").toggle();	
+	}
+	);
+})
+
+$(function(){
+		$(".div3-12").hover(function(){
+				$(".div3-12 ul").toggle();
+			})
+		$(".div3-12 ul span a").click(function(){
+				var str=$(this)[0].innerHTML;
+				$(".div3-121")[0].innerHTML=str;
+				$(".locationname")[0].innerHTML=str;
+			})
+	})
+//-----------------全选和反选--------------------------------
+$(function(){
+
+	$(".div4-2 .selectAll").click(function(){
+		var str=$(".div4-1 .select1")
+		if($(".div4-2 .selectAll")[0].checked){
+		  for(var i=0;i<str.length;i++){
+			str[i].checked=true;
+		  }
+		}else{
+			 for(var i=0;i<str.length;i++){
+			str[i].checked=false;
+		}
+		}
+	});
+})
+
+
+
+$(function(){ 
+	
+	$(".jian").live("click",function(){
+			var num=Number($(this).next().val());
+			if(num<=1){//点减号商品数量减少
+				num=1;
+			}else{
+				num=num-1;
+				
+			}
+		var price=$(this).parent().next().children()[0].innerHTML;//获得单价
+			$(this).parent().next().children()[1].innerHTML=(num*Number(price)).toFixed(2);//每件商品后面价格和
+		$(this).next().val(num);
+		var str=$(".div4-1 tr");
+	var prices=0;
+	for(var k=0;k<str.length;k++){
+	 prices=prices+Number(str[k].children[4].children[1].innerHTML);//每一行的最后一列
+		
+	}
+		$(".allPrices")[0].innerHTML=prices;
+		
+	});
+	$(".add").live("click",function(){//点加号数量增加
+	
+			var num=$(this).prev().val();
+				
+			num=Number(num)+1;
+			$(this).prev().val(num);
+		var price=$(this).parent().next().children()[0].innerHTML;//获得单价
+			$(this).parent().next().children()[1].innerHTML=(num*Number(price)).toFixed(2);//点击加号以后商品后面的价格和
+	
+	var str=$(".div4-1 tr");
+	var prices=0;
+	for(var k=0;k<str.length;k++){
+	 prices=prices+Number(str[k].children[4].children[1].innerHTML);//每一行的最后一列
+		
+	}
+		$(".allPrices")[0].innerHTML=prices.toFixed(1);
+		
+	});
+	//求所有购物车的商品和
+	
+		
+	$(".removetr").live("click",function(){//点击删除商品就会被删除
+		 if(confirm("确定要删除吗？")){
+		       $(this).parent().parent().remove();
+				}
+		
+		});
+		
+	$(".removeall").live("click",function(){
+		if(confirm("确定要删除全部商品吗？")){
+	        $(".div4-1 tr").remove();
+			$(".div4-21").show();
+			$(".allPrices").val(0);
+				}
+		
+		
+		
+	})
+})
+var userName=checkcookie("userId");
+var goodsnum=checkcookie("goodsnum");
+var index=checkcookie("xiabiao");
+$(function(){
+		if($(".denglu a").text()!=userName){
+			$(".denglu a").text(userName);
+			};
+	})
+	
+	
+//-----------------------------从后台获取商品并添加------------------------------------
+$(function(){
+	$.get("http://10.35.164.48:8080/myWeb/getShoppingCart.jsp",
+		{stuId:"2381623015",userName:userName},
+		function(responseStr){
+				var str=eval("("+responseStr+")");
+				$(".div4-1 .t").append("<tr><td style='width:40px;height:110px;text-align:center;'><input type='checkbox' class='select1'></td><td style='width:110px;height:110px;'><img src=../"+str[index].goodsImg+" style='width:70px;hieght'></td><td style='width:500px;height:110px;text-align:center;line-height:110px;'>"+str[index].goodsContent+"</td> <td style='width:140px;height:110px;text-align:center;line-height:110px;'><input type='button' value='-' style='width:30px;height:30px;' class='jian'><input type='text' value='1' style='width:50px;height:30px;' class='num'><input type='button' value='+' style='width:30px;height:30px;' class='add'></td><td style='width:220px;height:110px;text-align:center;line-height:110px;'>单价：￥<span class='trprises' style='margin-right:30px;'>"+str[index].goodsPrice+"</span>总价：￥<span>7.8</span></td><td><span class='removetr'>[删除]</span></td></tr>")
+					$(".num").val(goodsnum);
+				})
+})
+
+
+
+//-------------------------删除------------------------
+//$(function(){
+		//$.get("http://10.35.164.48:8080/myWeb/deleteGoods.jsp",
+		//{stuId:2381623015,userName:userName,goodsId:??????})
+	//}) 
+//--------------------------------------------------------------
+	</script>
+<body>
+	<div id="header">
+    	<p class="location">送至
+        	<span class="locationname">北京</span>
+        </p>
+		<p class="header-1"><img src="../images/head-1.jpg" />&nbsp;<a href="#">E宠就是正品</a></p>
+        <div id="suibian">
+            <ul class="header-2">
+        	 <li class="denglu"><a href="登录页面.html">[登录]</a></li>
+             <li><a href="注册页面（3） - 副本 (2).html">[注册]</a></li>
+             <li>
+             	<img src="../images/head-2.jpg" />
+                <a href="#">购物车</a>
+             </li>
+             <li class="header-21">
+				
+					<img src="../images/head-3.jpg" />
+					<a href="#">我的E宠</a>
+					<img src="../images/head-4.jpg"/>
+				<div class="header-22" style="display:none;height:200px;width:80px;">
+					<a href="#">我的订单</a>
+					<a href="#">充值得优惠</a>
+					<a href="#">兑换现金券</a>
+					<a href="#">推荐得惊喜</a>
+				</div>
+			</li>
+            <li class="header-23">
+             	 <a href="#">收藏我</a>
+               	 <img src="../images/head-4.jpg" />
+				<div class="header-24" style="display:none;width:200px;">
+					<span><a href="#">加入到收藏夹</a></span>
+					<span><a href="#">  保存到桌面 </a> </span>
+				</div>
+             </li>
+             <li><img src="../images/head-5.jpg" />
+             	<a href="#">手机版</a>
+                </li>
+             <li><a href="#">帮助</a></p>
+      	</ul>
+        
+        </div>
+    	
+     </div>
+     
+  <div id="div2">
+     	<div class="div2-zong">
+		<div class="div2-1" >
+        		<p class="div2-1" style="margin-top:26px;width:150px;"><a href="../首页.html"><img src="../images/logo.jpg" /></a></p>
+        </div>
+     	<div  class="div2-2" style="border:solid 2px #459d36;width:440px;height:34px;margin:35px 0px 0px 500px;">
+        	<input type="text" value="哈士奇" style="background-color:white;width:370px;height:33px;border:none;float:left;" />
+            <input type="submit" value="搜索" style="color:white;width:70px;height:34px;background-color:#459d36;float:left;" />
+         
+        </div>
+       
+        </div>
+        </div>
+ <div id="div3">
+ 	<div class="div3-zong">
+    		<ol>
+            	<li class="div3-11"><span>购物车</span></li>
+                <li class="div3-12">
+                	 发送到： <span class="div3-121">北京</span>
+                      <ul style="clear:both;display:none;">                        
+            	<li><span>华北：</span><span><a href="#">北京</a></span><span><a href="#">天津</a></span><span><a href="#">河北</a></span><span><a href="#">山西</a></span> <span><a href="#">内蒙古</a></span></li>
+                <li><span>华东：</span><span><a href="#">上海</a></span><span><a href="#">江苏</a></span><span><a href="#">浙江</a></span><span><a href="#">安徽</a></span><span> <a href="#">福建</a></span><span><a href="#"> 山东</a></span></li>
+             	<li><span>华南：</span><span><a href="#">广东</a></span><span><a href="#">广西</a></span><span><a href="#">海南</a></span></li> 
+                <li><span>华中：</span><span><a href="#">江西</a></span><span><a href="#">河南</a></span><span><a href="#">湖北</a></span><span><a href="#">湖南</a></span></li>
+				</ul> 
+                </li>
+            </ol>              
+        </div>
+ </div>
+ 
+ <div id="div4">
+	<div class="div4-zong">
+    	<div class="div4-1">
+		<table class="t">
+			<tr>
+				<td style="width:40px;height:110px;text-align:center;"><input type="checkbox" class="select1"></td>
+				<td style="width:110px;height:110px;"><img src="../images/goudiv5-1.jpg"></td>
+				<td style="width:500px;height:110px;text-align:center;line-height:110px;">风来客 幼犬营养肉压骨 鸡肉味 6只装 鸡肉</td>
+				<td style="width:140px;height:110px;text-align:center;line-height:110px;"><input type="button" value="-" style="width:30px;height:30px;" class="jian"><input type="text" value="1" style="width:50px;height:30px;" class="num"><input type="button" value="+" style="width:30px;height:30px;" class="add"></td>
+				<td style="width:280px;height:110px;text-align:center;line-height:110px;">单价：￥<span class="trprises" style="margin-right:30px;">17.8</span>总价：￥<span>17.8</span></td>
+                <td><span class="removetr">[删除]</span></td>
+			</tr>
+			<tr>
+				<td style="width:40px;height:110px;text-align:center;"><input type="checkbox" class="select1"></td>
+				<td><img src="../images/goudiv5-2.jpg"></td>
+				<td style="width:500px;height:110px;text-align:center;line-height:110px;">jolly pet耐咬胶系列玩具 中号球内球 直径14cm 中号</td>
+				<td style="width:140px;height:110px;text-align:center;line-height:110px;"><input type="button" value="-" style="width:30px;height:30px;" class="jian"><input type="text" value="1" style="width:50px;height:30px;" class="num"><input type="button" value="+" style="width:30px;height:30px;" class="add"></td>
+				<td style="width:280px;height:110px;text-align:center;line-height:110px;">单价：￥<span style="margin-right:30px;">93.00</span>总价：￥<span>93.00</span></td>
+                <td><span class="removetr">[删除]</span></td>
+			</tr>
+		</table>
+        </div>
+        <div class="div4-2">
+        	<ul>
+            	<li><input type="checkbox" class="selectAll">全选<span style="padding-left:30px;" class="removeall">删除选中商品</span></li>
+                <li style="margin-left:600px;width:200px;">总价：<span class="allPrices">110.80</span></li>
+                <li style="margin-left:40px;"><input type="button" value="去结算" style="width:170px;height:40px;background-color:green;"></li>
+                <li style="clear:both;">
+                	<a href="../首页.html"><input type="button" value="去首页" style="width:100px;height:40px;background-color:orange;"></a>
+                </li>
+				<li style="position:fixed;width:300px;height:100px;display:none;top:40%;left:30%;border:solid 1px gray;line-height:100px;font-size:20px;font-weight:bold;color:black;" class="div4-21">您还没有加购物车！快去首页吧</li>
+            </ul>
+        </div>
+	</div>
+ </div>
+</body>
+</html>

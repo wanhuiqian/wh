@@ -1,0 +1,61 @@
+*{margin:0;padding:0;}
+#header{height:28px;background-color:#f5f5f5;margin:0 auto;}
+#header a:hover{color:red;}
+.header-1{float:left;width:150px;}
+.header-1{margin-left:15px;}
+
+.header-2  li{float:left;margin-left:10px;list-style:none;}
+.header-21,.header-23{position:relative;}
+.header-22,.header-24{position:absolute;top:28px;left:10px;}
+.header-24{height:50px;border:solid 1px red;line-height:50px;}
+
+#header ul li a{font:bold 15px;}
+#suibian{width:540px;float:right;}
+#header a{text-decoration:none;font:14px;color:#666;line-height:28px;}
+#header .location{width:150px;float:left;position:relative;}
+#header .location ul{width:450px;height:220px;border:solid 1px gray;position:absolute;top:60px;left:60px;background-color:white;}
+.location ul li{line-height:40px;width:450px;}
+.location li span a{padding:0px 10px;border-right:solid 1px gray;font-size:20px;color:gray;line-height:50px;}
+
+
+
+#div2{width:100%;}
+.div2-zong{margin:0 auto;width:1200px;height:100px;}
+#div2 a:hover{color:red;}
+.div2-1,.div2-2{float:left;}
+.div2-2{margin-left:400px;}
+.div2-2 ul{width:445px;}
+.div2-2 li{float:left;list-style:none;margin-left:2px;}
+.div2-2 ul a{font-size:12px;color:#999999;line-height:36px;text-align:center;text-decoration:none;}
+
+
+#div3{width:100%;}
+#div3 li{list-style:none;}
+#div3 a{text-decoration:none;}
+#div3 a:hover{color:blue;}
+.div3-zong{width:1200px;margin:0 auto;height:40px;}
+.div3-12{width:200px;height:40px;position:relative;}
+.div3-12 ul{width:450px;height:200px;border:solid 1px gray;position:absolute;top:40px;left:0px;z-index:999;background-color:white;}
+.div3-12 ul li{line-height:40px;width:450px;}
+.div3-12 ul li span a{padding:0px 10px;border-right:solid 1px gray;font-size:20px;color:gray;line-height:50px;}
+.div3-11{float:left;width:200px;height:40px;line-height:40px;text-align:center;}
+.div3-12{float:left;margin-left:600px;}
+.div3-121{line-height:40px;text-align:center;border:solid 1px gray;}
+
+
+
+
+
+
+
+
+
+#div4{width:100%;margin-top:40px;}
+#div4 li{list-style:none;float:left;}
+.div4-zong{width:1200px;margin:0 auto;}
+.div4-zong table{border:solid 1px gray;width:1200;}
+.div4-zong table td{border:solid 1px #ccc;}
+.div4-zong table tr{border-bottom:solid 1px gray;height:110px;}
+.div4-2{width:1200px;height:50px;background-color:#f5f5f5;}
+.div4-2 li{line-height:50px;}
+.removetr{text-align:center;}
